@@ -1,11 +1,12 @@
 # Image Density and Visual Acuity on the web
 
+{{TOC}}
 
 [poem]
 1x, 2x, 3x, 4
 all of these `x`es, what are they for?
 Do those pixels translate to
-😍:heart-shaped-eyes: or 💩 :pile-of-poo: ?
+😍:heart-shaped-eyes: or 💩:pile-of-poo: ?
 How many pixels can people see?
 Let's ask science! (and the W3C)
 
@@ -120,27 +121,29 @@ And lest we forget or our original question, which is motivating this quest:
 We're now equipped with all of the webby background that we'll need to answer it 🥳. On to the _vision science_.
 
 
-## Eye charts
+## Visual Acuity
 
 [snellen chart]
 
 You've probably seen one of these. It's called a Snellen chart, and it is _very_ old; 'twas invented by a guy named Snellen in 1862!
 
-It's where we get the term "20/20 vision".  See that thick red line? That represents the line between Snellen's conception of "normal" and "impaired" vision. The line above it is the 20/20 line: if you can stand 20 feet away from this chart and read the letters on that line, you can resolve the same level of detail that a "normal" person can, at a distance of 20 feet. If you can read the line below – the 25/20 line – your vision is *better than normal*. You can resolve details at 25 feet that "normal" people can only see at 20 feet. Conversely, if you can't read anything past the "F P", it means that what you see at 20 feet, "normal" people can see five times further away – at a distance of 100 feet.
+Its where we get the term "20/20 vision".  See that thick red line? That represents the line between Snellen's conception of "normal" and impaired vision. The line above it is the 20/20 line: if you can stand 20 feet away from this chart and read the letters on that line, you can resolve the same level of detail that a "normal" person can, at a distance of 20 feet. If you can read the line below – the 25/20 line – your vision is *better than normal*. You can resolve details at 25 feet that "normal" people can only see at 20 feet. Conversely, if you can't read anything past the "F P", it means that what you see at 20 feet, "normal" people can see five times further away – at a distance of 100 feet.
 
-(I'm told that people outside of the United States call normal vision 6/6, because they talk in meters. My deepest and sincerest apologies to all of you for the imperial system of measurement, a unit named after a body part, British colonialism, and also: the United States.)
+(I'm told that people outside of the United States call normal vision 6/6, because they talk in meters. My deepest and sincerest apologies to all of you for the imperial system of measurement, a weird unit named after a weird body part, British colonialism, and also: the United States.)
 
 Let's zoom in on these letters:
 
 [E on a grid]
 
-The font here is big, and blocky. All of the letterforms here, in fact, are structured around a 5x5 grid. And at 20 feet away the letters on the 20/20 line occupy five arcminutes of visual angle. 
+The font here is big, and blocky. All of the letterforms here, in fact, are structured around a 5x5 grid. And at 20 feet away the letters on the 20/20 line occupy five [arcminutes](https://en.wikipedia.org/wiki/Minute_and_second_of_arc) of visual angle. 
 
 [diagram]
 
-If you have "20/20 vision" it means you can resolve one arcminute (0.0166°) of detail.
+If you have "20/20 vision" it means you can see details as small as one arcminute (0.0166°), but no smaller.
 
-So: on the one hand, we have a measure of human visual acuity, in terms of ability-to-resolve-visual-angles. Recall that `px` are actually (ideally) a _visual angle_. Maybe you can see where this is going?
+So on the one hand, we have a measure of human visual acuity, in terms of ability-to-resolve-visual-angles. And on the other, we have `px`, which are actually (ideally) a _visual angle_. 
+
+Maybe you can see where this is going?
 
 
 ## Visual Acuity on the Web
@@ -159,68 +162,96 @@ People with 20/20 vision don't get any benefit from displays or images with more
 
 Well then who in the **HECK** are all of these 2x and 3x and 4x devices for? Why would we *ever* want to send a 3x image to anybody??
 
-As ever: it's complicated.
+Well! First of all,
 
 
-## 20/20: not great
+### 20/20 is not that great, actually.
 
-Remember when I said that the Snellen chart is from 1862? Turns out, science has come to a more-sophisticated understanding of "normal" visual acuity, over the last 158 years.
+Remember when I said that the Snellen chart was invented in 1862? Turns out, science has come to a more-sophisticated understanding of "normal" visual acuity, over the last 158 years.
 
-For starters, we have a pretty good understanding of the mechanics of the eye, and we’re a lot better at identifying (and fixing!) eye problems. And so: when figuring out what sort of visual abilities count as "normal," we can better leave aside all of the folks with diagnosable problems. This raises the bar.
+For starters, we have a pretty good understanding of the mechanics of the eye, and we’re a lot better at identifying (and correcting!) eye problems. And so: when figuring out what sort of visual abilities count as "normal," we can better leave aside all of the folks with diagnosable problems. This raises the bar.
 
-So–what's normal? Well here's a chart from a 199x study, which measured the visual acuity of a hundred and seven 17-18 year olds.
+So–what's “normal?”
+
+Let's first look at this chart, from a 199x study by Elliott et alTODO VERIFY, which measured the visual acuity of a bunch of 17-18 year olds.
 
 [image]
 
-Note that scientists have decided that Snellen numbers are rather inconvenient for math-ing around with so they have invented a metric called "LogMAR" which is basically "Snellen but make it one number instead of two and give it some nice math-y properties while you're at it"; I have marked a few Snellen number equivalents on the chart to give you a hopefully-more-intuitive frame of reference.
+Note: scientists have decided that Snellen numbers are rather inconvenient for math-ing around with so they have invented a metric called "LogMAR" which is basically "Snellen but make it one number instead of two and give it some nice math-y properties while you're at it"; I have marked a few Snellen number equivalents on the chart to give you a hopefully-more-intuitive frame of reference.
 
-A large majority of these kids have better than 20/20 vision. In fact, the median teen here has _20/14 vision_.
+A large majority of these kids have better than 20/20 vision. In fact, the median teen here clocked _20/14 vision_.
 
 What does that mean for the web?
 
 [image - x numbers]
 
-Here, instead of marking up the chart with snellen numberes, I've marked it up with "the maximum density that would be useful to a person with this visual acuity". TL;DR: all of these teens could see **~1x**. The median teen could see **1.76x**. The highest-acuity kids topped out at about **2.5x**.
+Here, instead of marking up the chart with Snellen numbers, I've marked it up with "the maximum density that’s resolvable by people with this level of visual acuity". TL;DR: all of these teens could see better than **~1x**. The median teen could see **1.76x**. The highest-acuity kids topped out at about **2.5x**.
+
+Ok, so 1.76x isn't The Answer: is **2.5x The Answer??**
+
+No! Let's 😎 continue to complicate 😎.
 
 
-## Getting old: also not great!
+### Getting old: also not great!
 
-Now, before we take too much away from those numbers, we should understand something else: the most important variable that predicts a person's visual acuity is their age. In that same study, the authors kindly included the following chart, which plotted their median result (circled) with a bunch of other median results from a bunch of other studies, charted and separated by age.
+For better or worse, we're not all 17. And the most important variable for predicting a person's visual acuity is their age. In that same study, Olssen et allTODO kindly included the following chart, which plotted their median result (circled) with a bunch of other median results from a bunch of other studies, charted and separated by age.
 
-As with so much in life: as babies, our vision is terrible. As we mature, it *rapidly* improves until our mid-to-late-twenties. And then, the rest of life is a long, slow decline.
+[chart with logmar/snellen]
 
-Again: what does it mean for the web?
+When we're babies, our vision is terrible. As we mature, it *rapidly* improves until our mid-to-late-twenties. And then, the rest of life is a long, slow decline.
+
+What does this mean for the web? Here's the same chart marked up with
+
+1. Max-useful-densities
+2. The [first, second, and third standard deviations](https://en.wikipedia.org/wiki/68–95–99.7_rule) from a couple of the studies.
 
 [chart with x numbers]
 
-Here's the same chart marked up with max-useful-densities. I've also drawn bars around the original datapoint showing the full range of results from their study.
+Ok, wow, now we're getting somewhere. It looks kinda like 3x screens might be useful for some outliers in their mid-to-late twenties. And for the median person, of any age: 2x is enough.
 
-Ok, now we're getting somewhere. It looks kinda like 3x screens might be useful for some outliers in their mid-to-late twenties. And for the median person, of any age: 2x is enough.
+Is 2x good enough for most people!? 
 
-Now _that_ is a catchy takeaway. Contrarian! Actionable! Tweetable!! Unfortunately,
+Nah.
+
+### CSS pixels are slippery fish
+
+The most important reason you that should not tweet out "2x is good enough for most people, says internet expert Eric Portis" is this: the analysis that got us to that conclusion assumed CSS pixels were (basically) reference pixels, which is to say: *constant*; in fact, they are *quite variable*. They vary from device to device, user to user, and even moment to moment.
+
+In order to figure out the visual angle that `1px` subtends on a viewer’s eye, we need three things: 
+
+1. The physical size of the hardware pixels (aka the **[device pixel pitch](https://en.wikipedia.org/wiki/Dot_pitch)**. The device manufacturer controls this; it is fixed per device.
+2. The **display density** (aka the `window.devicePixelRatio`). Browsers set the default, and the CSS Working Group has politely suggested that they all aim for the reference pixel, when doing so. But browsers can set it to whatever, so this definitely varies from device to device. And then users control the zoom level, which modulates the default, and varies per user and session.
+
+We combine those two to get a **CSS pixel pitch**. And then, into this already-variable mix, we add:
+
+3. The user’s **viewing distance**. Browser vendors might have some idea of what this will be, generally, when they set the default CSS pixel pitch. But users are the ones in control, and viewing distance varies from person to person and moment to moment, for all kinds of reasons.
+
+Let's name a couple.
+
+First, people pick viewing distances depending on visual capabilities. This can take at least two forms, with opposite effects:
+
+1.  People with low acuity can "zoom in" in two ways: by setting the browser zoom level, and also by just _getting closer to the screen_. Most folks do both of these things, in some combination.
+2.  Like death and taxes, [Presbyopia](https://en.wikipedia.org/wiki/Presbyopia) comes for us all.
+
+> A 15-year-old can focus as close as 3 inches. At age 32 the near point averages 4.5 inches; at 40 it is 10 inches; at 50 it is 20 inches; at 60 it reaches about 39 inches. At around the age of 40, many people with otherwise adequate vision begin to hold reading material farther and farther from their eyes until their “arms get too short”. They then require reading glasses.
+
+—Dennis R. Ankrum, Viewing Angle And Distance In Computer Workstations
+
+TL;DR sometimes impaired vision makes us hold screens closer; sometimes it makes us hold them further away. 
+
+Another reason that people 
 
 
-## It's complicated
 
-I promised answers. And we've started to sketch out some meaty ones! But if you were hoping for _easy_ answers, well – my apologies for the rest of the article.
-
-### CSS pixels, again
-
-The first and most important complication to all of this is: it's all based on _reference pixels_. Which are no more than a polite suggestion; browsers can do what ever they dang well please, when the decide how big to make CSS pixels.
-
-So, what do some real ones do? Here's a chart:
-
-[chart]
-
-
-### Viewing distances
-
-
-### Content and viewing contexts
+### Another variable: contrast
 
 
 
-## Measurable costs and benefits
+
+
+## So: It Depends
+
+As ever, The Answer is "It Depends". All of life is a game of tradeoffs, no? But at least now you're thinking about costs and can *estimate benefits*.
 
 
 ### One success story
