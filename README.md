@@ -32,15 +32,15 @@ With length units! When we set, say `width: 10em` on an element, the `em` there 
 
 Length units come in a couple of different flavors: _relative_, and _absolute_.
 
-Relative length units are, well, relative to the size of something else; they vary based context. That “something else” can be the viewport, font metrics, or the element's parent in the DOM. Relative length units are extremely cool and exceedingly useful, but, definitionally, they are variable – slippery fish. Let us consider something a little more fixed: _absolute length units_.
+Relative length units vary based context. They are "relative" to the viewport, font metrics, or the element's parent in the DOM. While exceedingly useful, length units are, by definition, _highly variable_. Let us consider something a little more fixed: _absolute length units_.
 
-Absolute length units. – like `px`,  `in`, `cm`, and `pt`, are fixed _per device (and zoom level)_; they're not going to change out from under our feet as we walk the DOM or resize the viewport. Reliable! They are, however, *all* defined in relation to *one, root, thing*: the ur-unit; the **anchor unit**, the **canonical-freaking-unit**. which on screens is:
+Absolute length units. – like `px`,  `in`, `cm`, and `pt`, are fixed _per device (and zoom level)_. They're not going to change out from under our feet as we walk the DOM, change fonts, or resize the viewport. Reliable! They are, however, *all* defined in relation to *one, root, thing*: the ur-unit; the **anchor unit**, the **canonical-freaking-unit**. which on screens is:
 
 `px`
 
 The `px` unit. 
 
-On screens, `px` is the _king of length units_. [All other absolute length units are defined in terms of `px`](https://www.w3.org/TR/css-values-4/#absolute-lengths), and just abut everything on the web that deals in sizes – computed styles, a million JavaScript APIs, you name it – inputs and outputs in `px`.
+On screens, `px` is the _king of length units_. [All other absolute length units are defined in terms of `px`](https://www.w3.org/TR/css-values-4/#absolute-lengths), and just abut everything on the web that deals in sizes – computed styles, JavaScript APIs – takes inputs and delivers outputs in `px`.
 
 So... what's a `px`? A pixel! But what _kind_ of pixel?
 
@@ -62,7 +62,7 @@ Tiny lights; you're probably looking at vast quantities of them _right now._ For
 
 Points in an imaginary grid defined entirely within software. Once upon a time, you could sort of count on these generally mapping 1:1 with hardware pixels. Not anymore!
 
-For instance, if I call window.innerWidth on my iPhone, I get 375, because even though its display is 750 physical pixels across, Safari (at its default zoom level) has a `window.devicePixelRatio` of `2`. So each CSS pixel maps to a 2x2 grid of hardware pixels.
+For instance, if I call `window.innerWidth` on my iPhone, I get 375, because even though its display is 750 physical pixels across, Safari (at its default zoom level) has a `window.devicePixelRatio` of `2`. So each CSS pixel maps to a 2x2 grid of hardware pixels.
 
 ### So what is a CSS pixel, then, actually
 
@@ -73,12 +73,12 @@ Let's ask the experts:
 
 Yet another "pixel"!?
 
-Before we get into what a “reference pixel” is, let us pause, and note words "recommended" and "approximates" here. Nothing is certain and browsers can define `px` however they want 😜. But, given that they've been asked very nicely by the CSS Working Group to center their implementations around a "reference pixel," what the heck is a reference pixel?
+Before we get into what a “reference pixel” is, let us pause, and note words "recommended" and "approximates" here. Browsers can define `px` however they want 😜. But, given that they've been asked nicely by the CSS Working Group to center their implementations around a "reference pixel," what the heck is a reference pixel?
 
 > The reference pixel is the visual angle of one pixel on a device with a pixel density of 96dpi and a distance from the reader of an arm’s length. For a nominal arm’s length of 28 inches, the visual angle is therefore about 0.0213 degrees.
 > —[CSS Units Level 4](https://www.w3.org/TR/css-values-4/#reference-pixel)
 
-**Reference pixels are visual angles!**This is one of my favorite things about CSS. This definition – although perpetually confusing to folks used to designing for fixed canvases, or dealing in actual hardware pixels – embraces the fact that the web is going to be viewed on all kinds of devices and at all kinds of viewing distances. Let's say you set a text size to `18px`. Because `px` (ideally) represent a visual angle, you, the designer, have NO idea how physically tall that text is going to be, or how many hardware pixels it will occupy. But you _can_ have some degree of confidence that it will be _legible_ – and just as legible on a smartwatch on someone's wrist as it will be on a big-screen TV across a room. [The web is for everything](https://www.w3.org/Consortium/mission#principles), and this definition of its canonical, anchor unit – `px` – enables that.
+**Reference pixels are visual angles!** This is one of my favorite things about CSS. This definition – although perpetually confusing to folks used to designing for fixed canvases, or dealing in actual hardware pixels – embraces the fact that the web is going to be viewed on all kinds of devices and in all kinds of contexts. Let's say you set a text size to `18px`. Because `px` (ideally) represent a visual angle, you, the designer, have NO idea how physically tall that text is going to be, or how many hardware pixels it will occupy. But you _can_ have some degree of confidence that it will be _legible_ – and just as legible on a smartwatch on someone's wrist as it will be on a big-screen TV across a room. [The web is for everything](https://www.w3.org/Consortium/mission#principles), and this definition of its canonical, anchor unit – `px` – enables that.
 
 
 ## Density on the Web
@@ -95,7 +95,7 @@ Well – there are two kinds of "density" :
 
 [image]
 
-This is a ratio of hardware pixels to CSS pixels
+This is a ratio of _hardware pixels_ to _CSS pixels_
 
 For instance, recall my iPhone 7's `window.devicePixelRatio` of `2`, signifying that every CSS pixel contains 2x2 hardware pixels. My iPhone has a _display density_ of 2.
 
@@ -103,18 +103,18 @@ For instance, recall my iPhone 7's `window.devicePixelRatio` of `2`, signifying 
 
 [image]
 
-This is a ratio of image pixels to CSS pixels.
+This is a ratio of _image pixels_ to _CSS pixels_.
 
-Let's say I've got a 300x300 image, and I stick it in a srcset and give it a 3x image density descriptor. By default, the browser will lay it out with a width of 100px, because it sees the 3x _image density_ and dutifully crams grids of 3x3 image pixels into every CSS pixel.
+Let's say I've got a 300x300 image, and I stick it in a `srcset` and give it a `3x` image density descriptor. By default, the browser will lay it out with a width of 100px, because it sees the 3x _image density_ and dutifully crams grids of 3x3 image pixels into every CSS pixel.
 
 Ok. To review:
 
-- sizing in the web is done in CSS pixels
-- CSS pixels are (ideally) defined as a visual angle
-- there are two other sorts of 'pixels'; image pixels and device pixels
-- there are two kinds of 'density' – image density and display density – which relate image pixels and device pixels to CSS pixels.
+- Sizing in the web is done in CSS pixels.
+- CSS pixels are (ideally) defined as a visual angle.
+- There are two other sorts of 'pixels'; image pixels and device pixels.
+- There are two kinds of 'density' – image density and display density – which relate image pixels and device pixels to CSS pixels.
 
-And lest we forget or our original question, which is motivating this quest:
+And lest we forget or our original question:
 
 > At what point to the visual benefits of super-high-density images stop being worth their exponential performance costs?
 
@@ -127,21 +127,21 @@ We're now equipped with all of the webby background that we'll need to answer it
 
 You've probably seen one of these. It's called a Snellen chart, and it is _very_ old; 'twas invented by a guy named Snellen in 1862!
 
-Its where we get the term "20/20 vision".  See that thick red line? That represents the line between Snellen's conception of "normal" and impaired vision. The line above it is the 20/20 line: if you can stand 20 feet away from this chart and read the letters on that line, you can resolve the same level of detail that a "normal" person can, at a distance of 20 feet. If you can read the line below – the 25/20 line – your vision is *better than normal*. You can resolve details at 25 feet that "normal" people can only see at 20 feet. Conversely, if you can't read anything past the "F P", it means that what you see at 20 feet, "normal" people can see five times further away – at a distance of 100 feet.
+It is where we get the term "20/20 vision".  See that thick red line? That represents the line between Snellen's conception of "normal" and impaired vision. The line above it is the 20/20 line: if you can stand 20 feet away from this chart and read the letters on that line, you can resolve the same level of detail that a "normal" person can, at a distance of 20 feet. If you can read the line below – the 25/20 line – your vision is *better than normal*. You can resolve details at 25 feet that "normal" people can only see at 20 feet. Conversely, if you can't read anything past the "F P", it means that what you see at 20 feet, "normal" people can see five times further away – at a distance of 100 feet.
 
-(I'm told that people outside of the United States call normal vision 6/6, because they talk in meters. My deepest and sincerest apologies to all of you for the imperial system of measurement, a weird unit named after a weird body part, British colonialism, and also: the United States.)
+(I'm told that people outside of the United States call normal vision 6/6, because they talk in meters. My deepest and sincerest apologies to all of you for the imperial system of measurement, a weird unit named after a weird body part, colonialism, and the United States.)
 
 Let's zoom in on these letters:
 
 [E on a grid]
 
-The font here is big, and blocky. All of the letterforms here, in fact, are structured around a 5x5 grid. And at 20 feet away the letters on the 20/20 line occupy five [arcminutes](https://en.wikipedia.org/wiki/Minute_and_second_of_arc) of visual angle. 
+The font here is big and blocky. All of the letterforms here, in fact, are structured around a 5x5 grid. And at 20 feet away the letters on the 20/20 line occupy five [arcminutes](https://en.wikipedia.org/wiki/Minute_and_second_of_arc) of visual angle. 
 
 [diagram]
 
-If you have "20/20 vision" it means you can see details as small as one arcminute (0.0166°), but no smaller.
+If you have "20/20 vision" it means you can see strokes with a minimum width of one arcminute (0.0166°).
 
-So on the one hand, we have a measure of human visual acuity, in terms of ability-to-resolve-visual-angles. And on the other, we have `px`, which are actually (ideally) a _visual angle_. 
+So on the one hand, we have a measure of human visual acuity, in terms of ability-to-resolve-features-that-occupy-certian-visual-angles. And on the other, we have `px`, which are actually (ideally) a _visual angle_. 
 
 Maybe you can see where this is going?
 
@@ -158,7 +158,7 @@ Time for math 😎.
 
 1 image pixel / 0.7825 CSS pixels = an image density of 1.278x!!
 
-People with 20/20 vision don't get any benefit from displays or images with more than 1.278x of density!?!!!??
+So – people with 20/20 vision don't get any benefit from displays or images with more than 1.278x of density!?!!!??
 
 Well then who in the **HECK** are all of these 2x and 3x and 4x devices for? Why would we *ever* want to send a 3x image to anybody??
 
@@ -169,11 +169,9 @@ Well! First of all,
 
 Remember when I said that the Snellen chart was invented in 1862? Turns out, science has come to a more-sophisticated understanding of "normal" visual acuity, over the last 158 years.
 
-For starters, we have a pretty good understanding of the mechanics of the eye, and we’re a lot better at identifying (and correcting!) eye problems. And so: when figuring out what sort of visual abilities count as "normal," we can better leave aside all of the folks with diagnosable problems. This raises the bar.
+For starters, we have a pretty good understanding of the mechanics of the eye, and we’re a lot better at identifying (and correcting!) eye problems. And so: when figuring out what sort of visual abilities count as "normal," we can better identify diagnosable abnormalities. This raises the bar.
 
-So–what's “normal?”
-
-Let's first look at this chart, from a 199x study by Elliott et alTODO VERIFY, which measured the visual acuity of a bunch of 17-18 year olds.
+How far? Let's first look at this chart, from a 199x study by Elliott et alTODO VERIFY, which measured the visual acuity of a bunch of 17-18 year olds.
 
 [image]
 
@@ -187,9 +185,9 @@ What does that mean for the web?
 
 Here, instead of marking up the chart with Snellen numbers, I've marked it up with "the maximum density that’s resolvable by people with this level of visual acuity". TL;DR: all of these teens could see better than **~1x**. The median teen could see **1.76x**. The highest-acuity kids topped out at about **2.5x**.
 
-Ok, so 1.76x isn't The Answer: is **2.5x The Answer??**
+Ok, so 1.278x isn't The Answer: is **2.5x The Answer??**
 
-No! Let's 😎 continue to complicate 😎.
+Nah.
 
 
 ### Getting old: also not great!
@@ -215,7 +213,7 @@ Nah.
 
 ### CSS pixels are slippery fish
 
-The most important reason you that should not tweet out "2x is good enough for most people, says internet expert Eric Portis" is this: the analysis that got us to that conclusion assumed CSS pixels were (basically) reference pixels, which is to say: *constant*; in fact, they are *quite variable*. They vary from device to device, user to user, and even moment to moment.
+The most important reason you that should absolutely not tweet out "2x is good enough for most people, says internet expert Eric Portis" is this: the analysis that got us to that conclusion assumed CSS pixels were reference pixels, which is to say: *constant*; in fact, they are *quite variable*. They vary from device to device, user to user, and even moment to moment.
 
 In order to figure out the visual angle that `1px` subtends on a viewer’s eye, we need three things: 
 
@@ -226,9 +224,9 @@ We combine those two to get a **CSS pixel pitch**. And then, into this already-v
 
 3. The user’s **viewing distance**. Browser vendors might have some idea of what this will be, generally, when they set the default CSS pixel pitch. But users are the ones in control, and viewing distance varies from person to person and moment to moment, for all kinds of reasons.
 
-Let's name a couple.
+Let's identify a couple.
 
-First, people pick viewing distances depending on visual capabilities. This can take at least two forms, with opposite effects:
+First, people pick viewing distances depending on their visual capabilities. This can take at least two forms, with opposite effects:
 
 1.  People with low acuity can "zoom in" in two ways: by setting the browser zoom level, and also by just _getting closer to the screen_. Most folks do both of these things, in some combination.
 2.  Like death and taxes, [Presbyopia](https://en.wikipedia.org/wiki/Presbyopia) comes for us all.
@@ -237,9 +235,11 @@ First, people pick viewing distances depending on visual capabilities. This can 
 
 —Dennis R. Ankrum, Viewing Angle And Distance In Computer Workstations
 
-TL;DR sometimes impaired vision makes us hold screens closer; sometimes it makes us hold them further away. 
+TL;DR some kinds of impaired vision make us hold screens closer; others make us hold them further away. 
 
-Another reason that people 
+Another reason that people change viewing distances is the context that they're using their device in.
+
+Laptops on a plane are going to be different distances from your face than laptops at a desk. 
 
 
 
