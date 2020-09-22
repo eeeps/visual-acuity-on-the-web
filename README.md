@@ -3,21 +3,23 @@
 {{TOC}}
 
 [poem]
-1x, 2x, 3x, 4
-all of these `x`es, what are they for?
-Do those pixels translate to
-😍:heart-shaped-eyes: or 💩:pile-of-poo: ?
-How many pixels can people see?
-Let's ask science! (and the W3C)
+1x, 2x, 3x, 4  
+all of these `x`es, what are they for?  
+Do those pixels translate to  
+😍:heart-shaped-eyes: or 💩:pile-of-poo: ?  
+How many pixels can people see?  
+Let's ask science! (and the W3C)  
 
 
 Consider four versions of an image:
 
 [table]
+<pre>
 market-1x.jpg 200x100 35kb 200ms
 market-2x.jpg 200x100 35kb 200ms
 market-3x.jpg 200x100 35kb 200ms
 market-4x.jpg 200x100 35kb 200ms
+</pre>
 
 As image resolution increases, performance gets worse. When we're packing more and more pixels into the same physical space, on ever-higher-resolution displays, it *seems* like there *must* be some point of diminishing returns. At what point do the visual benefits of super-high-density images stop being worth their exponential performance costs?
 
@@ -239,7 +241,7 @@ TL;DR some kinds of impaired vision make us hold screens closer; others make us 
 
 Another reason that people change viewing distances is the context that they're using their device in.
 
-Laptops on a plane are going to be different distances from your face than laptops at a desk. 
+Laptops on a plane are going to be different distances from your face than laptops at a desk. People hold their phones closer to their face when they're lying down in bed than they do when they're standing or sitting. 
 
 
 
